@@ -1,0 +1,29 @@
+---
+title: "Dakar Auchan"
+author: "Bachir"
+date: "19 May 2019"
+output: html_document
+---
+
+## Introduction
+
+The objective of this project is to show the location of the different Auchan stores within Dakar city.
+
+## Auchan position
+
+```{r eval=FALSE, echo=TRUE}
+#library(htmlwidgets)
+library(leaflet)
+AuchanLatLong <- data.frame(
+  name = c("Almadies", "Ngor", "Yoff", "Scat Urbam 1", "Scat Urbam 2", "Liberte 6", "Liberte 5", "Dieuppeul", "HLM 1", "Sacre coeur", "Maristes", "Ouakam", "Keur Gorgui", "HLM 2", "Point E 2", "Mermoz", "Point E 1", "Fann", "Gilbrata", "Plateau", "Port"),
+  lat = c(14.73861, 14.75358, 14.75368, 14.73569, 14.73831, 14.72809, 14.72293, 14.72297, 14.72364, 14.71959, 14.73759, 14.71991, 14.71092, 14.71323, 14.70302, 14.69965, 14.69805, 14.69184, 14.68380, 14.66836, 14.67198),
+  lng = c(-17.51305, -17.49436, -17.46698, -17.46245, -17.45642, -17.46996, -17.45612, -17.45603, -17.44614, -17.46619, -17.43624, -17.49032, -17.46863, -17.44591, -17.46169, -17.47007, -17.45718, -17.47348, -17.44372, -17.44131, -17.43224))
+map <- AuchanLatLong %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(popup = AuchanLatLong$name, clusterOptions = markerClusterOptions()) %>%
+  addLegend(labels = "Auchan Shop", colors = "red")
+map
+#saveWidget(map, file="auchan.html", selfcontained=FALSE)
+```
+
